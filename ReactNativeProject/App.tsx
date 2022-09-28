@@ -1,20 +1,28 @@
-import {StyleSheet, Text, View, Button, StatusBar} from 'react-native';
+import {StyleSheet, Text, View, Button, StatusBar, Image} from 'react-native';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-import Movies from './components/Movies';
-import ProfileMovie from './components/ProfileMovie';
+import {MoviesScreen, TVShowScreen} from './components/Screens';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-function HomeScreen() {
+function LogoTitle(prop: any) {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>hello. full time dons</Text>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingBottom: 5,
+      }}>
+      <Image
+        style={{width: 20, height: 20}}
+        source={require('./assets/exclaimer.png')}
+      />
+      <Text style={{paddingLeft: 5}}>{prop.title}</Text>
     </View>
   );
 }
@@ -25,7 +33,7 @@ function App() {
       <StatusBar barStyle="default" backgroundColor="red" />
       <Tab.Navigator
         initialRouteName="Movies"
-        activeColor="red"
+        activeColor="green"
         inactiveColor="white"
         barStyle={{backgroundColor: '#694fad'}}
         screenOptions={({route}) => ({
@@ -41,23 +49,11 @@ function App() {
             return <Ionicons name={iconName} size={24} color={color} />;
           },
         })}>
-        <Tab.Screen name="Movies" component={HomeScreen} />
-        <Tab.Screen name="TV Shows" component={ProfileMovie} />
+        <Tab.Screen name="Movies" component={MoviesScreen} />
+        <Tab.Screen name="TV Shows" component={TVShowScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    fontSize: 62,
-    color: 'white',
-    fontWeight: 'bold',
-    justifyContent: 'center',
-  },
-});
