@@ -9,33 +9,14 @@ import {MoviesScreen, TVShowScreen} from './components/Screens';
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-function LogoTitle(prop: any) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        paddingBottom: 5,
-      }}>
-      <Image
-        style={{width: 20, height: 20}}
-        source={require('./assets/exclaimer.png')}
-      />
-      <Text style={{paddingLeft: 5}}>{prop.title}</Text>
-    </View>
-  );
-}
-
 function App() {
   return (
     <NavigationContainer>
-      <StatusBar barStyle="default" backgroundColor="red" />
       <Tab.Navigator
         initialRouteName="Movies"
-        activeColor="green"
-        inactiveColor="white"
-        barStyle={{backgroundColor: '#694fad'}}
+        activeColor="orange"
+        inactiveColor="grey"
+        barStyle={{backgroundColor: '#12161f', height: 70}}
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, color}) => {
             let iconName;
@@ -47,6 +28,9 @@ function App() {
             }
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={24} color={color} />;
+          },
+          tabBarStyle: {
+            height: 10,
           },
         })}>
         <Tab.Screen name="Movies" component={MoviesScreen} />

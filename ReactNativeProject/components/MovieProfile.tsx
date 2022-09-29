@@ -7,11 +7,12 @@ import {
   ImageBackground,
   StatusBar,
   Image,
+  ScrollView,
 } from 'react-native';
 import {GetMovieProfile} from '../util/http';
 import {BackPageIcon} from '../components/BackPageIcon';
 import {LinearGradient} from 'expo-linear-gradient';
-import {Rating, AirbnbRating} from 'react-native-ratings';
+import {AirbnbRating} from 'react-native-ratings';
 
 class MovieProfile extends Component {
   constructor(props) {
@@ -34,6 +35,10 @@ class MovieProfile extends Component {
 
     navigation.setOptions({
       headerShown: false,
+      tabBarStyle: {display: 'none'},
+      headerStyle: {
+        backgroundColor: '#010206',
+      },
     });
 
     const {ProfileId} = route.params;
@@ -54,7 +59,8 @@ class MovieProfile extends Component {
   }
 
   onPress = () => {
-    console.log('TESTSSS');
+    const {navigation} = this.props;
+    navigation.goBack();
   };
 
   render() {
@@ -100,24 +106,15 @@ class MovieProfile extends Component {
             style={styles.gradientImage2}
             colors={['rgba(0,0,0,0.5)', 'transparent']}
           />
-          <AirbnbRating
-            count={11}
-            reviews={[
-              'Terrible',
-              'Bad',
-              'Meh',
-              'OK',
-              'Good',
-              'Hmm...',
-              'Very Good',
-              'Wow',
-              'Amazing',
-              'Unbelievable',
-              'Jesus',
-            ]}
-            defaultRating={11}
-            size={20}
-          />
+          <View style={styles.stars}>
+            <AirbnbRating
+              count={10}
+              defaultRating={this.state.getMovieData.ratings}
+              size={20}
+              reviews={[]}
+              isDisabled={true}
+            />
+          </View>
           <Text style={styles.overview}>
             {this.state.getMovieData.overview}
           </Text>
@@ -137,6 +134,10 @@ const styles = StyleSheet.create({
   overview: {
     color: 'white',
     zIndex: 4,
+    textAlign: 'justify',
+    padding: 15,
+    paddingTop: 20,
+    fontSize: 15,
   },
   genre: {
     bottom: 80,
@@ -186,6 +187,9 @@ const styles = StyleSheet.create({
     width: 140,
     height: 240,
     opacity: 0.9,
+    zIndex: 3,
+  },
+  stars: {
     zIndex: 3,
   },
 });

@@ -1,11 +1,16 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import TVShows from './TvShow';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
+import TVShows from './TvShows';
+import TVShowProfile from './TVShowProfile';
 import Movies from './Movies';
 import LogoTitle from './LogoTitle';
 import MovieProfile from './MovieProfile';
-import {NavigationContainer} from '@react-navigation/native';
-const Stack = createNativeStackNavigator();
+
+const Stack = createStackNavigator();
 
 export function MoviesScreen() {
   return (
@@ -14,10 +19,22 @@ export function MoviesScreen() {
         name="MoviesScreen"
         component={Movies}
         options={{
-          headerTitle: props => <LogoTitle {...props} title="Movies" />,
+          headerTitle: props => (
+            <LogoTitle {...props} title="Exclaimer Movies" />
+          ),
+          headerStyle: {
+            backgroundColor: '#010206',
+          },
         }}
       />
-      <Stack.Screen name="MovieProfile" component={MovieProfile} />
+      <Stack.Screen
+        name="MovieProfile"
+        component={MovieProfile}
+        options={{
+          gestureDirection: 'vertical',
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -28,7 +45,20 @@ export function TVShowScreen() {
         name="TVShowScreen"
         component={TVShows}
         options={{
-          headerTitle: props => <LogoTitle {...props} title="TV Shows" />,
+          headerTitle: props => (
+            <LogoTitle {...props} title="Exclaimer TV Shows" />
+          ),
+          headerStyle: {
+            backgroundColor: '#010206',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="TVShowProfile"
+        component={TVShowProfile}
+        options={{
+          gestureDirection: 'vertical',
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         }}
       />
     </Stack.Navigator>

@@ -8,14 +8,14 @@ import {
   Image,
   Pressable,
 } from 'react-native';
-import {GetListMovies} from '../util/http';
+import {GetListTVShows} from '../util/http';
 
-function Movies({navigation}) {
-  const [listMovies, setListMovies] = useState([]);
+function TVShows({navigation}) {
+  const [listTVShows, setListTVShows] = useState([]);
 
   useEffect(() => {
-    GetListMovies().then(data => {
-      setListMovies(data);
+    GetListTVShows().then(data => {
+      setListTVShows(data);
     });
   }, []);
 
@@ -23,12 +23,12 @@ function Movies({navigation}) {
     <View style={{backgroundColor: '#1c1d21'}}>
       <ScrollView>
         <View style={styles.container}>
-          {listMovies.map((Movie, index) => (
+          {listTVShows.map((TVShow, index) => (
             <View key={index} style={styles.title}>
               <Pressable
                 onPress={() => {
-                  navigation.navigate('MovieProfile', {
-                    ProfileId: Movie.Id,
+                  navigation.navigate('TVShowProfile', {
+                    ProfileId: TVShow.Id,
                   });
                   navigation.setOptions(() => console.log('settings'));
                 }}>
@@ -36,10 +36,11 @@ function Movies({navigation}) {
                   <Image
                     style={styles.thumbnail}
                     source={{
-                      uri: 'https://image.tmdb.org/t/p/w500/' + Movie.ImagePath,
+                      uri:
+                        'https://image.tmdb.org/t/p/w500/' + TVShow.ImagePath,
                     }}
                   />
-                  <Text style={styles.caption}>{Movie.Title}</Text>
+                  <Text style={styles.caption}>{TVShow.Title}</Text>
                 </View>
               </Pressable>
             </View>
@@ -50,7 +51,7 @@ function Movies({navigation}) {
   );
 }
 
-export default Movies;
+export default TVShows;
 
 const styles = StyleSheet.create({
   container: {

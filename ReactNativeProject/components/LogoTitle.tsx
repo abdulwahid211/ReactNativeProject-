@@ -10,11 +10,19 @@ export default function LogoTitle(prop: any) {
         justifyContent: 'center',
         paddingBottom: 5,
       }}>
-      <Image
+      {/* <Image
         style={{width: 20, height: 20}}
         source={require('../assets/exclaimer.png')}
-      />
-      <Text style={{paddingLeft: 5}}>{prop.title}</Text>
+      /> */}
+      <Text
+        style={{
+          paddingLeft: 5,
+          color: 'white',
+          fontSize: 20,
+          fontWeight: 'bold',
+        }}>
+        {prop.title}
+      </Text>
     </View>
   );
 }

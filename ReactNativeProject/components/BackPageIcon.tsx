@@ -14,7 +14,7 @@ export function BackPageIcon(prop: any) {
       <TouchableOpacity onPress={prop.onPress}>
         <Image
           style={{width: 30, height: 30}}
-          source={require('../assets/arrow-down.png')}
+          source={require('../assets/down.png')}
         />
       </TouchableOpacity>
     </View>
