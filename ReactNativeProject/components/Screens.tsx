@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TVShows from './TvShow';
 import Movies from './Movies';
 import LogoTitle from './LogoTitle';
-import ProfileMovie from './ProfileMovie';
+import MovieProfile from './MovieProfile';
 import {NavigationContainer} from '@react-navigation/native';
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ export function MoviesScreen() {
           headerTitle: props => <LogoTitle {...props} title="Movies" />,
         }}
       />
-      <Stack.Screen name="Profile" component={ProfileMovie} />
+      <Stack.Screen name="MovieProfile" component={MovieProfile} />
     </Stack.Navigator>
   );
 }

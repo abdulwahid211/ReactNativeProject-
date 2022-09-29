@@ -1,16 +1,13 @@
 import * as React from 'react';
-import {Component, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   Image,
-  SafeAreaView,
-  StatusBar,
   Pressable,
 } from 'react-native';
-import axios from 'axios';
 import {GetListMovies} from '../util/http';
 
 function Movies({navigation}) {
@@ -29,19 +26,19 @@ function Movies({navigation}) {
           <View key={index} style={styles.title}>
             <Pressable
               onPress={() => {
-                navigation.navigate('Profile', {
-                  id: Movie.Title,
-                  imageUrl:
-                    'https://image.tmdb.org/t/p/w500/' + Movie.ImagePath,
+                navigation.navigate('MovieProfile', {
+                  ProfileId: Movie.Id,
                 });
               }}>
-              <Image
-                style={styles.thumbnail}
-                source={{
-                  uri: 'https://image.tmdb.org/t/p/w500/' + Movie.ImagePath,
-                }}
-              />
-              <Text>{Movie.Title}</Text>
+              <View style={styles.thumbnailContainer}>
+                <Image
+                  style={styles.thumbnail}
+                  source={{
+                    uri: 'https://image.tmdb.org/t/p/w500/' + Movie.ImagePath,
+                  }}
+                />
+                <Text style={styles.caption}>{Movie.Title}</Text>
+              </View>
             </Pressable>
           </View>
         ))}
@@ -54,23 +51,25 @@ export default Movies;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flexWrap: 'wrap',
-    alignItems: 'center',
-    margin: 0,
-    paddingTop: 20,
-    paddingHorizontal: 11,
+  },
+  thumbnailContainer: {
+    maxWidth: 165,
+    margin: 7,
   },
   thumbnail: {
-    width: 100,
-    height: 100,
-    resizeMode: 'stretch',
+    width: 145,
+    height: 200,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
   },
-  title: {
-    paddingLeft: 10,
-    padding: 10,
-    margin: 0,
+  caption: {
+    textAlign: 'center',
+    maxWidth: 130,
+    textAlignVertical: 'center',
   },
 });

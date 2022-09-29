@@ -2,13 +2,20 @@ import axios from 'axios';
 export const API_KEY = '9b75d5e316dbf6cb0dae80e04e4454b3';
 import {Movie} from '../modals/Movie';
 
-const url: string =
+const URL_MOVIES: string =
   'https://api.themoviedb.org/3/movie/popular?api_key=' +
   API_KEY +
   '&language=en-US&page=1';
 
+const URL_MOVIE_PROFILE = (id: number) =>
+  'https://api.themoviedb.org/3/movie/' +
+  id +
+  '?api_key=' +
+  API_KEY +
+  '&language=en-US&page=1';
+
 export async function GetListMovies() {
-  const response = await axios.get(url).catch(function (error) {
+  const response = await axios.get(URL_MOVIES).catch(function (error) {
     // handle error
     console.log(error);
   });
@@ -26,4 +33,20 @@ export async function GetListMovies() {
   }
 
   return results;
+}
+
+export async function GetMovieProfile(id: number) {
+  const url = URL_MOVIE_PROFILE(id);
+  const response = await axios.get(url);
+
+  const movieObject = {
+    backdropImage: response.data.backdrop_path,
+    genre: response.data.genres[0].name,
+    title: response.data.title,
+    overview: response.data.overview,
+    posterImage: response.data.poster_path,
+    ratings: response.data.vote_average,
+    runtime: response.data.runtime,
+  };
+  return movieObject;
 }
