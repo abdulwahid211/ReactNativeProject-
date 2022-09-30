@@ -5,10 +5,10 @@ import {
   CardStyleInterpolators,
 } from '@react-navigation/stack';
 import TVShows from './TvShows';
-import TVShowProfile from './TVShowProfile';
+import Profile from './Profile';
 import Movies from './Movies';
 import LogoTitle from './LogoTitle';
-import MovieProfile from './MovieProfile';
+import ThemeColors from '../style/themes';
 
 const Stack = createStackNavigator();
 
@@ -23,13 +23,13 @@ export function MoviesScreen() {
             <LogoTitle {...props} title="Exclaimer Movies" />
           ),
           headerStyle: {
-            backgroundColor: '#010206',
+            backgroundColor: ThemeColors.HeaderBar,
           },
         }}
       />
       <Stack.Screen
-        name="MovieProfile"
-        component={MovieProfile}
+        name="Profile"
+        component={Profile}
         options={{
           gestureDirection: 'vertical',
           cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
@@ -51,14 +51,6 @@ export function TVShowScreen() {
           headerStyle: {
             backgroundColor: '#010206',
           },
-        }}
-      />
-      <Stack.Screen
-        name="TVShowProfile"
-        component={TVShowProfile}
-        options={{
-          gestureDirection: 'vertical',
-          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         }}
       />
     </Stack.Navigator>

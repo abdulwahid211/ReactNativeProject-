@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {MoviesScreen, TVShowScreen} from './components/Screens';
+import ThemeColors from '././style/themes';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -16,7 +17,7 @@ function App() {
         initialRouteName="Movies"
         activeColor="orange"
         inactiveColor="grey"
-        barStyle={{backgroundColor: '#12161f', height: 70}}
+        barStyle={{backgroundColor: ThemeColors.TabBar, height: 70}}
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, color}) => {
             let iconName;

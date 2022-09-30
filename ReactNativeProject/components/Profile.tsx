@@ -9,12 +9,13 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import {GetMovieProfile} from '../util/http';
-import {BackPageIcon} from '../components/BackPageIcon';
+import {GetContentProfile} from '../util/http';
+import {BackPageIcon} from './BackPageIcon';
 import {LinearGradient} from 'expo-linear-gradient';
 import {AirbnbRating} from 'react-native-ratings';
+import ThemeColors from '../style/themes';
 
-class MovieProfile extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,9 +42,9 @@ class MovieProfile extends Component {
       },
     });
 
-    const {ProfileId} = route.params;
+    const {ProfileId, ContentType} = route.params;
 
-    GetMovieProfile(ProfileId).then(data => {
+    GetContentProfile(ContentType, ProfileId).then(data => {
       this.setState(prevState => ({
         getMovieData: {
           backdropImage: data.backdropImage,
@@ -124,11 +125,11 @@ class MovieProfile extends Component {
   }
 }
 
-export default MovieProfile;
+export default Profile;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: ThemeColors.ProfilePage,
     height: '100%',
   },
   overview: {
